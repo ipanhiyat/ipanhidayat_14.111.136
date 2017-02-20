@@ -1,0 +1,36 @@
+<style>
+div.container {
+	width: 100%;
+	border 1px solid gray;
+}
+
+header, footer {
+	padding: 2mm;
+	color: white;
+	background-color: BLUE;
+	clear: left;
+	text-align: center;
+	}
+	
+nav {
+	float: left;
+	max-width: 120px;
+	margin: 0;
+	padding: 1cm;
+}
+nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+nav ul a {
+	text-decoration: none;
+}
+
+artikle{
+margin-left: 130px;
+berder-left: 1px colid gray;
+padding :1px;   
+overflow; hidden;
+}
+
+</style>
