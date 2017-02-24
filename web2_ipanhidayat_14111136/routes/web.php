@@ -1,4 +1,5 @@
 <?php
+use App\Mahasiswa;
 route::get ('/', 'viewcontroller@index');
 route::get ('/halamanawal', 'viewcontroller@xhalamanawal');
 route::get ('/tambah', 'viewcontroller@xtambah');
@@ -30,4 +31,39 @@ Route::get('/edit', function(){
 Route::get('/tambah', function(){
 	return view('tambah');
 });
+route::get('/tambah', function(){
+	$mahasiswa = New mahasiswa;
+	$mahasiswa -> nama = "ipan";
+	$mahasiswa -> nim = "14111136";
+	$mahasiswa -> alamat ="bandung";
+	$mahasiswa -> save();
+});
+route::get('/ubah', function()
+{
+	$mahasiswa = Mahasiswa::find(1);
+	$mahasiswa -> nama = "ipan hidayat";
+	$mahasiswa -> nim = "14111136";
+	$mahasiswa -> alamat ="bandung";
+	$mahasiswa -> save();
+});
+route::get('/tampil',function()
+{
+	$mahasiswa = Mahasiswa::all();
+	foreach($mahasiswa as $mhs)
+	{
+		echo"<b>Nama</b>:";
+		echo $mhs>nama;
+		echo"<br><b>NIM</b>:";
+		echo $mhs->nim;
+		echo"<br><b>Alamat</b>:";
+		echo $mhs->Alamat;
+	}
+});
+route::get('/hapus',function()
+{
+	$mahasiswa = Mahasiswa::find(2);
+	$mahasiswa-> delete();
+});	
 
+	
+	
