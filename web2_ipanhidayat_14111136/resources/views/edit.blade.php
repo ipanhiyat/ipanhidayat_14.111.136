@@ -1,25 +1,34 @@
 @extends('templates.index')
 @section('content')
 <article>
-	<form name="input" method="POST" action="proses_tambah.php">
-		<table border="0" width="50%" align="center">
+<form  action="{{route('mahasiswa.update', $mahasiswa->id)}}" method="post">
+    <input name="_method" type="hidden" value="PATCH">
+					{{csrf_field()}}
+					<table border="1" width="75%" align="center">
 			<tr>
-				<td><b>Edit Data</b></td>
+				<th>Edit Data</th>
 			</tr>
 			<tr>
-				<td><input type="text" name="nim" maxlenght="10" placeholder="NIM"></input></td>
+				<td>Nama</td>
+				<td>:</td>
+				<td><input type="text" name="nama" class="form-control" placeholder="Nama" value="{{$mahasiswa->nama}}" size="70"></input></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="nama" maxlenght="50" placeholder="Nama"></input></td>
+				<td>NIM</td>
+				<td>:</td>
+				<td><input type="text" name="nim" class="form-control" placeholder="NIM" value="{{$mahasiswa->nim}}" size="70"></input></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="alamat" maxlenght="50" placeholder="Alamat"></input></td>
+				<td>Alamat</td>
+				<td>:</td>
+				<td><input type="text" name="alamat"  class="form-control" placeholder="Alamat" value="{{$mahasiswa->alamat}}" size="70"></input></td>
 			</tr>
 			<tr>
-				
-				<td colspan="3"><input name="submit" type="submit" value="SIMPAN"></input><input type="reset" value="BATAL"></input></td>
+
+				<td colspan="3"><input type="submit" class="btn btn-primary" value="UPDATE"><a
+				<td colspan="3" align="left"><a href="{{URL::to('halamanawal')}}"><button type="button">BATAL</button><a
 			</tr>
+			
 		</table>
-	</form>
 	</article>
 @stop

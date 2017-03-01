@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mahasiswa;
+use App\Http\Requests\UpdateRequest;
 
 class ViewController extends Controller
 {
@@ -17,12 +19,14 @@ class ViewController extends Controller
 	}
 	 public function xhalamanawal()
 	{
-	 return view ('halamanawal');
-	{
+	   	$mahasiswa = Mahasiswa::all();
+		return view('halamanawal', compact('mahasiswa'));
+    
+	}
 	 public function xtambah()
     {
 	 return view ('tambah');
-	 {
+	}
 	 public function xedit()
     {
 	 return view ('edit');
@@ -60,7 +64,21 @@ class ViewController extends Controller
     {
         //
     }
+ public function form_add()
+    {
+        return view::make ('tambah'); 
+    }
+    public function add_action(Request $request)
+    {
+        $mahasiswa             = new Mahasiswa;
+        $mahasiswa->nama       = $request->nama;
+        $mahasiswa->nim        = $request->nim;
+        $mahasiswa->alamat     = $request->alamat;
+        $mahasiswa->save();
 
+      
+        return redirect ('halamanawal');
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -69,7 +87,8 @@ class ViewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        return view('edit', compact('mahasiswa'));
     }
 
     /**
@@ -79,19 +98,28 @@ class ViewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
-    }
+        
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->nama         = $request->nama;
+        $mahasiswa->nim          = $request->nim;
+        $mahasiswa->alamat       = $request->alamat;
+        $mahasiswa->save();
+		
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        
+		return redirect ('halamanawal');
+        //return redirect('halamanawal')->with('alert-success', 'Data Berhasil Diubah.');
+		
+	
+	}
+  
     public function destroy($id)
     {
-        //
+       
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa -> delete();
+        return redirect('halamanawal')->with('alert-success', 'Data Berhasil Dihapus.');
     }
 }
